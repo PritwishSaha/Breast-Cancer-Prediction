@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cellscope · Breast Cancer Cell Classifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============================================
+     NAVBAR
+============================================= -->
+<nav class="navbar">
+  <div class="logo">
+    <span class="logo-mark" aria-hidden="true"></span>
+    Pritwish saha
+  </div>
+  <div class="nav-model">
+    <span class="nav-dot" aria-hidden="true"></span>
+    Logistic Regression · Live
+  </div>
+</nav>
+
+<main class="container">
+
+  <!-- ============================================
+       HERO
+  ============================================= -->
+  <section class="hero">
+    <div class="hero-grid">
+
+      <div class="hero-text">
+        <div class="badge">Machine Learning · Oncology Diagnostics</div>
+        <h1>Read the cell before it reads you.</h1>
+        <p>
+          A logistic regression classifier trained on five nuclear
+          measurements — radius, texture, perimeter, area and concave
+          points — to estimate whether a sample leans benign or malignant.
+        </p>
+        <a href="#measurements" class="hero-cta">
+          Begin a scan
+          <span class="hero-cta-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+
+      <!-- SIGNATURE ELEMENT: live scanner viewport -->
+      <div class="scanner-wrap" aria-hidden="true">
+        <div class="scanner-viewport">
+
+          <div class="scanner-ring"></div>
+          <div class="scanner-ring scanner-ring--slow"></div>
+
+          <svg class="scanner-lines" viewBox="0 0 340 340">
+            <line x1="170" y1="170" x2="170" y2="30"></line>
+            <line x1="170" y1="170" x2="303" y2="127"></line>
+            <line x1="170" y1="170" x2="252" y2="283"></line>
+            <line x1="170" y1="170" x2="88" y2="283"></line>
+            <line x1="170" y1="170" x2="37" y2="127"></line>
+          </svg>
+
+          <div class="scanner-image-wrap" aria-hidden="true">
+            <div class="scanner-image"></div>
+          </div>
+
+          <div class="node" style="left:50%; top:8.8%;">
+            <span class="node-dot"></span>
+            <span class="node-label">Radius</span>
+          </div>
+          <div class="node" style="left:89.1%; top:37.3%;">
+            <span class="node-dot"></span>
+            <span class="node-label">Texture</span>
+          </div>
+          <div class="node" style="left:74.2%; top:83.3%;">
+            <span class="node-dot"></span>
+            <span class="node-label">Perimeter</span>
+          </div>
+          <div class="node" style="left:25.8%; top:83.3%;">
+            <span class="node-dot"></span>
+            <span class="node-label">Area</span>
+          </div>
+          <div class="node" style="left:10.9%; top:37.3%;">
+            <span class="node-dot"></span>
+            <span class="node-label">Concave Pts</span>
+          </div>
+
+        </div>
+        <div class="scanner-caption">5 features under analysis</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+       STAT CARDS
+  ============================================= -->
+  <section class="stats">
+    <div class="stat-card">
+      <span class="stat-icon" aria-hidden="true">◆</span>
+      <div><small>Model</small><strong>Logistic Regression</strong></div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon" aria-hidden="true">▣</span>
+      <div><small>Scaling</small><strong>StandardScaler</strong></div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon" aria-hidden="true">✶</span>
+      <div><small>Features</small><strong>5 Measurements</strong></div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon" aria-hidden="true">◎</span>
+      <div><small>Task</small><strong>Binary Classification</strong></div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       MAIN GRID
+  ============================================= -->
+  <section class="main-grid" id="measurements">
+
+    <!-- INPUT CARD -->
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <h2>Cell Measurements</h2>
+          <p>Enter the five nuclear measurements from the sample.</p>
+        </div>
+      </div>
+
+      <form id="predictionForm">
+        <div class="input-grid">
+
+          <div class="input-group">
+            <label for="radius_mean">Mean Radius</label>
+            <input type="number" id="radius_mean" value="14" step="0.1" min="0" required>
+            <span>Average radius of cell nuclei</span>
+          </div>
+
+          <div class="input-group">
+            <label for="texture_mean">Mean Texture</label>
+            <input type="number" id="texture_mean" value="19" step="0.1" min="0" required>
+            <span>Average texture measurement</span>
+          </div>
+
+          <div class="input-group">
+            <label for="perimeter_mean">Mean Perimeter</label>
+            <input type="number" id="perimeter_mean" value="90" step="0.1" min="0" required>
+            <span>Average perimeter</span>
+          </div>
+
+          <div class="input-group">
+            <label for="area_mean">Mean Area</label>
+            <input type="number" id="area_mean" value="650" step="1" min="0" required>
+            <span>Average cell area</span>
+          </div>
+
+          <div class="input-group full-width">
+            <label for="concave_points_mean">Mean Concave Points</label>
+            <input type="number" id="concave_points_mean" value="0.05" step="0.001" min="0" required>
+            <span>Average concave points measurement</span>
+          </div>
+
+        </div>
+
+        <button type="submit" class="predict-button" id="predictButton">
+          <span class="predict-button-label">Run Diagnostic Scan</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- RESULT CARD -->
+    <div class="card result-card">
+      <h2>Diagnostic Readout</h2>
+      <p class="result-description">Results appear here once a scan completes.</p>
+
+      <!-- DEFAULT -->
+      <div id="defaultResult" class="default-result">
+        <div class="idle-scanner" aria-hidden="true">
+          <div class="idle-ring"></div>
+          <div class="idle-dot"></div>
+        </div>
+        <h3>Awaiting Sample</h3>
+        <p>Enter the cell measurements and run a scan.</p>
+      </div>
+
+      <!-- RESULT -->
+      <div id="predictionResult" class="prediction-result hidden">
+
+        <div class="gauge-wrap">
+          <svg class="gauge" viewBox="0 0 140 140">
+            <circle class="gauge-track" cx="70" cy="70" r="58"></circle>
+            <circle id="gaugeArc" class="gauge-arc" cx="70" cy="70" r="58"></circle>
+          </svg>
+          <div class="gauge-center">
+            <div id="resultIcon" class="result-icon">●</div>
+            <div id="confidence" class="gauge-value">0%</div>
+          </div>
+        </div>
+
+        <h3 id="predictionText">Benign</h3>
+        <p class="confidence-caption">Model confidence</p>
+
+        <div class="probability-section">
+
+          <div class="probability-row">
+            <div><span class="legend-dot legend-benign"></span>Benign</div>
+            <strong id="benignProbability">0%</strong>
+          </div>
+          <div class="progress">
+            <div id="benignBar" class="progress-bar benign-bar"></div>
+          </div>
+
+          <div class="probability-row">
+            <div><span class="legend-dot legend-malignant"></span>Malignant</div>
+            <strong id="malignantProbability">0%</strong>
+          </div>
+          <div class="progress">
+            <div id="malignantBar" class="progress-bar malignant-bar"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ============================================
+       MODEL INFORMATION
+  ============================================= -->
+  <section class="model-section">
+    <h2>About the Model</h2>
+    <div class="info-grid">
+
+      <div class="info-card">
+        <div class="info-icon" aria-hidden="true">◆</div>
+        <h3>Logistic Regression</h3>
+        <p>A supervised machine-learning algorithm used for binary classification.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon" aria-hidden="true">▣</div>
+        <h3>StandardScaler</h3>
+        <p>Standardizes the input features before sending them to the model.</p>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon" aria-hidden="true">✶</div>
+        <h3>Five Features</h3>
+        <p>Radius, texture, perimeter, area and concave points.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- DISCLAIMER -->
+  <div class="disclaimer">
+    <span aria-hidden="true">⚠</span>
+    This application is an educational machine-learning demonstration and is not a medical diagnostic tool.
+  </div>
+
+</main>
+
+<footer>
+  Cellscope
+  <span>•</span>
+  Breast Cancer Prediction — Machine Learning Project
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
